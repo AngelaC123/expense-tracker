@@ -1,10 +1,14 @@
 const express = require('express')
+const { engine } = require('express-handlebars')
 
 const PORT = 3000
 const app = express()
 
+app.engine('hbs', engine({ defaultLayout: 'main', extname: '.hbs' }))
+app.set('view engine', 'hbs')
+
 app.get('/', (req, res) => {
-  res.send('<h1>This is a expense tracker</h1>')
+  res.render('index')
 })
 
 app.listen(PORT, () => {
