@@ -37,7 +37,7 @@
         類別：
       </label>
       <div class="col-8">
-        <select class="form-select required" aria-label="Default select example" name="categoryId">
+        <select class="form-select" aria-label="Default select example" name="categoryId" required>
           <option value="{{selectedCategory._id}}" selected>{{selectedCategory.name}}</option>
           {{#each category}}
           <option value="{{this._id}}">{{this.name}}</option>

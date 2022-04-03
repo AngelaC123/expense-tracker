@@ -5,7 +5,7 @@ const db = require('../../config/mongoose')
 
 db.once('open', () => {
   return Promise.all(Array.from(category, (data, i) => {
-    Category.create({ name: data.name })
+    Category.create({ name: data.name, iconClassList: data.icon })
   }))
     .then(() => {
       console.log('categorySeeder done!')
