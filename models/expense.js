@@ -21,4 +21,4 @@ const expenseSchema = new Schema({
   }
 })
 
-module.exports = mongoose.model('expenseSchema', Expense)
+module.exports = mongoose.model('Expense', expenseSchema )
