@@ -1,4 +1,5 @@
 const express = require('express')
+const category = require('../../models/category')
 const router = express.Router()
 
 const Category = require('../../models/category')
@@ -25,19 +26,37 @@ router.post('/', (req, res) => {
 })
 
 
-// // Check one expense
-// router.post('/:id', (req, res) => {
-//   //res.render('...')
-// })
-
 // Edit 
 router.get('/:id/edit', (req, res) => {
-  //res.render('...')
+  const _id = req.params.id
+  Record.findById(_id)
+    .populate('categoryId')
+    .lean()
+    .then(record => {
+      const selectedCategory = record.categoryId
+      Category.find({ _id: { $ne: record.categoryId } })
+        .lean()
+        .then(category => {
+          res.render('edit', { record, selectedCategory, category })
+        })
+    })
+    .catch(err => console.log(err))
 })
 
-router.post('/:id/edit', (req, res) => {
-  //res.render('...')
+router.put('/:id', (req, res) => {
+  const editedRecord = req.body
+  const _id = req.params.id
+  return Record.findById(_id)
+    .then(record => {
+      record = Object.assign(record, editedRecord)
+      return record.save()
+    })
+    .then(() => res.redirect('/')
+    )
+    .catch(err => console.log(err))
 })
+
+
 
 // Delete
 router.post('/:id', (req, res) => {
