@@ -1,9 +1,8 @@
 const express = require('express')
-const category = require('../../models/category')
 const router = express.Router()
 
 const Category = require('../../models/category')
-const Expense = require('../../models/expense')
+const Record = require('../../models/record')
 
 
 // Create new
@@ -17,9 +16,9 @@ router.get('/new', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-  const expense = req.body
+  const record = req.body
 
-  return Expense.create(expense)
+  return Record.create(record)
     .then(() => res.redirect('/'))
     .catch(err => console.log(err))
 

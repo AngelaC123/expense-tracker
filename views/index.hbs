@@ -18,11 +18,11 @@
     <span class="totalAmount-number text-end">{{totalAmount}}</span>
   </div>
   <div class="mt-4 mx-auto col-11 expense-list">
-    {{#if expense}}
+    {{#if record}}
     <ul class="list-group list-group-flush">
       <div class="divide-line"></div>
 
-      {{#each expense}}
+      {{#each record}}
       <li class="list-group-item d-flex align-items-center justify-content-around">
         <i class="fa-solid fa-house fa-2x p-0 ms-2 "></i>
 
@@ -114,7 +114,7 @@
     <div class="divide-line"></div>
   </div>
   <div class="text-center">
-    <a href="/expenses/new" class="btn btn-warning mt-4 col-3">新增支出</a>
+    <a href="/records/new" class="btn btn-warning mt-4 col-3">新增支出</a>
   </div>
 
 </div>
