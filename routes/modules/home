@@ -5,6 +5,7 @@ const Category = require('../../models/category')
 const Expense = require('../../models/expense')
 
 let categoriesDisplay = []
+let totalAmount = 0
 
 router.get('/', (req, res) => {
 
@@ -17,7 +18,9 @@ router.get('/', (req, res) => {
   return Expense.find()
     .lean()
     .then(expense => {
-      res.render('index', { expense, category: categoriesDisplay })
+      let totalAmount = 0
+      expense.forEach(record => totalAmount += record.amount)
+      res.render('index', { expense, category: categoriesDisplay, totalAmount })
     })
     .catch(err => console.log(err))
 
