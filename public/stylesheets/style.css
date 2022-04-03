@@ -1,0 +1,36 @@
+* {
+  box-sizing: border-box;
+}
+
+.index-content-block,
+.new-content-block {
+  max-width: 600px;
+  margin-top: 80px;
+}
+
+.totalAmount-number {
+  flex-basis: 80%;
+
+  font-size: 3.5em;
+  color: orange;
+  font-weight: 400;
+}
+
+.totalAmount-text {
+  font-size: 1.2em;
+  color: #8f8f8f;
+  font-weight: 400;
+}
+
+
+.date-text {
+  font-size: 0.5em;
+}
+
+.divide-line {
+  border-top: 1px solid #dddddd;
+}
+
+.notes {
+  font-size: 14px;
+}
