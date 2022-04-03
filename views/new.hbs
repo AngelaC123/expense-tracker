@@ -9,7 +9,7 @@
   </div>
 
 
-  <form action="" method="post" class="col-6 mx-auto mt-4">
+  <form action="/expenses" method="post" class="col-6 mx-auto mt-4">
 
     <div class="mb-3 row mb-4">
       <label for="name" class="col-4 col-form-label text-end px-0">
@@ -17,7 +17,7 @@
         名稱：
       </label>
       <div class="col-8">
-        <input type="text" class="form-control" id="name" required>
+        <input type="text" class="form-control" id="name" name="name" required>
       </div>
     </div>
 
@@ -27,7 +27,7 @@
         日期：
       </label>
       <div class="col-8">
-        <input type="date" class="form-control" id="date" required>
+        <input type="date" class="form-control" id="date" name="date" required>
       </div>
     </div>
 
@@ -37,13 +37,16 @@
         類別：
       </label>
       <div class="col-8">
-        <select class="form-select required" aria-label="Default select example">
+        <select class="form-select required" aria-label="Default select example" name="categoryId">
           <option selected>請選擇類別</option>
-          <option value="1">家居物業</option>
+          {{#each category}}
+          <option value="{{this._id}}">{{this.name}}</option>
+          {{/each}}
+          {{!-- <option value="1">家居物業</option>
           <option value="2">交通出行</option>
           <option value="3">休閒娛樂</option>
           <option value="4">餐飲食品</option>
-          <option value="5">其他</option>
+          <option value="5">其他</option> --}}
         </select>
       </div>
     </div>
@@ -54,12 +57,12 @@
         金額：
       </label>
       <div class="col-8">
-        <input type="number" class="form-control" id="amount" required>
+        <input type="number" class="form-control" id="amount" name="amount" required>
       </div>
     </div>
 
     <div class="text-end">
-      <a href="/new" class="btn btn-warning col-6 me-4">新增支出</a>
+      <button class="btn btn-warning col-6 me-4">新增支出</button>
     </div>
   </form>
 

@@ -3,7 +3,7 @@
     <select class="form-select form-select-lg" aria-label="Default select example">
       <option selected>全部類別</option>
       {{#each category}}
-      <option>{{this.name}}</option>
+      <option value="{{this._id}}">{{this.name}}</option>
       {{/each}}
       {{!-- <option value="1">居家物業</option>
       <option value="2">交通出行</option>
@@ -13,15 +13,33 @@
     </select>
   </div>
 
-  <div class="totalAmount-block col-6 d-flex justify-content-around mx-auto mt-5">
+  {{!-- <div class="totalAmount-block col-6 d-flex justify-content-around mx-auto mt-5">
     <span class="totalAmount-text">總支出</span>
     <span class="totalAmount-number text-end">10000</span>
-  </div>
-
-  {{!-- <div class="mt-4 mx-auto col-11 expense-list">
+  </div> --}}
+  <div class="mt-4 mx-auto col-11 expense-list">
+    {{#if expense}}
     <ul class="list-group list-group-flush">
+      <div class="divide-line"></div>
 
-      <div class="divide-line"></div> --}}
+      {{#each expense}}
+      <li class="list-group-item d-flex align-items-center justify-content-around">
+        <i class="fa-solid fa-house fa-2x p-0 ms-2 "></i>
+
+        <div class="ms-0 col-3 my-1 d-flex flex-column">
+          <h4 class="my-0 mb-0 align-baseline">{{this.name}}</h4>
+          <span class="date-text mt-0-0 p-0">{{this.date}}</span>
+        </div>
+        <h5 class="amount ms-5 me-3 align-middle my-auto">{{this.amount}}</h5>
+
+        <div class="buttons d-flex ">
+          <a href="" class="btn btn-secondary d-block mx-1">修改</a>
+          <form action="" method="post">
+            <button class="btn btn-danger">刪除</button>
+          </form>
+        </div>
+      </li>
+      {{/each}}
 
       {{!-- <li class="list-group-item d-flex align-items-center justify-content-around">
         <i class="fa-solid fa-house fa-2x p-0 ms-2 "></i>
@@ -90,13 +108,13 @@
       </li> --}}
 
 
-      {{!--
-    </ul>
-    <div class="divide-line"></div>
-  </div> --}}
 
+    </ul>
+    {{/if}}
+    <div class="divide-line"></div>
+  </div>
   <div class="text-center">
-    <a href="/expense/new" class="btn btn-warning mt-4 col-3">新增支出</a>
+    <a href="/expenses/new" class="btn btn-warning mt-4 col-3">新增支出</a>
   </div>
 
 </div>

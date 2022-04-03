@@ -1,15 +1,27 @@
 const express = require('express')
-const category = require('../../models/category')
 const router = express.Router()
 
 const Category = require('../../models/category')
+const Expense = require('../../models/expense')
+
+let categoriesDisplay = []
 
 router.get('/', (req, res) => {
-  return Category.find()
-    .lean()
-    .then(category => {
-      res.render('index', { category })
-    })
-})
 
+  Category.find()
+    .lean()
+    .then(categories => {
+      categoriesDisplay = categories
+    })
+
+  return Expense.find()
+    .lean()
+    .then(expense => {
+      res.render('index', { expense, category: categoriesDisplay })
+    })
+    .catch(err => console.log(err))
+
+
+
+})
 module.exports = router

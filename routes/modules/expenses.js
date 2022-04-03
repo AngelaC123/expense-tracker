@@ -1,14 +1,28 @@
 const express = require('express')
+const category = require('../../models/category')
 const router = express.Router()
+
+const Category = require('../../models/category')
+const Expense = require('../../models/expense')
 
 
 // Create new
 router.get('/new', (req, res) => {
-  res.render('new')
+  return Category.find()
+    .lean()
+    .then(category => {
+      res.render('new', { category })
+    })
+    .catch(err => console.log(err))
 })
 
 router.post('/', (req, res) => {
-  //res.render('...')
+  const expense = req.body
+
+  return Expense.create(expense)
+    .then(() => res.redirect('/'))
+    .catch(err => console.log(err))
+
 })
 
 
