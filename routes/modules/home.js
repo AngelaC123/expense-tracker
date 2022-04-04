@@ -6,12 +6,13 @@ const Record = require('../../models/record')
 
 
 router.get('/', (req, res) => {
+  const userId = req.user._id
 
   Category.find()
     .lean()
     .then(category => {
 
-      return Record.find()
+      return Record.find({ userId })
         .populate('categoryId')
         .lean()
         .then(record => {
