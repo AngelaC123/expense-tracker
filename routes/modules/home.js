@@ -1,4 +1,5 @@
 const express = require('express')
+const category = require('../../models/category')
 const router = express.Router()
 
 const Category = require('../../models/category')
@@ -22,6 +23,33 @@ router.get('/', (req, res) => {
         })
         .catch(err => console.log(err))
     })
+})
+
+router.post('/', (req, res) => {
+  const userId = req.user._id
+  const { displayCategoryId } = req.body
+
+  if (displayCategoryId) {
+    Category.find({ _id: { $ne: displayCategoryId } })
+      .lean()
+      .then(notSelectedCategory => {
+        Category.findById(displayCategoryId)
+          .lean()
+          .then(displayCategory => {
+            return Record.find({ userId, categoryId: displayCategoryId })
+              .populate('categoryId')
+              .lean()
+              .then(record => {
+                let totalAmount = 0
+                record.forEach(data => totalAmount += data.amount)
+                res.render('index', { record, totalAmount, displayCategory, category: notSelectedCategory })
+              })
+          })
+      })
+  } else {
+
+    res.redirect('/')
+  }
 })
 
 module.exports = router

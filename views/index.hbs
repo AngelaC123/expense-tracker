@@ -1,16 +1,27 @@
 <div class="index-content-block col-12 mx-auto mt-5">
   <div class="col-7 mx-auto">
-    <select class="form-select form-select-lg" aria-label="Default select example">
-      <option selected>全部類別</option>
-      {{#each category}}
-      <option value="{{this._id}}">{{this.name}}</option>
-      {{/each}}
-      {{!-- <option value="1">居家物業</option>
-      <option value="2">交通出行</option>
-      <option value="3">休閒娛樂</option>
-      <option value="4">餐飲食品</option>
-      <option value="5">其他</option> --}}
-    </select>
+    <form action="/" method="post">
+      <select class="form-select form-select-lg" aria-label="Default select example" onchange="this.form.submit()"
+        name="displayCategoryId">
+
+        {{#if displayCategory}}
+
+        <option value="{{displayCategory_id}}" selected>{{displayCategory.name}}</option>
+        <option value="">--- 全部類別 ---</option>
+        {{#each category}}
+        <option value="{{this._id}}">{{this.name}}</option>
+        {{/each}}
+
+        {{else}}
+        <option value="" selected>--- 全部類別 ---</option>
+        {{#each category}}
+        <option value="{{this._id}}" name="categoryname">{{this.name}}</option>
+        {{/each}}
+
+        {{/if}}
+
+      </select>
+    </form>
   </div>
 
   <div class="totalAmount-block col-6 d-flex justify-content-around mx-auto mt-5">
