@@ -10,19 +10,19 @@
         </span>
       </div>
 
-      <form class=" mb-4 col-7 mx-auto" action="">
+      <form class="mb-4 col-7 mx-auto" action="/user/login" method="post">
 
-        <label for="name" class="form-label text-end px-0 mb-1">
+        <label for="email" class="form-label text-end px-0 mb-1">
           <span class="text-danger">*</span>
           Email：
         </label>
-        <input type="text" class="form-control mb-4" id="name" name="email" value="" required>
+        <input type="email" class="form-control mb-4" id="email" name="email" value="" required>
 
-        <label for="name" class="form-label text-end px-0 mb-1">
+        <label for="password" class="form-label text-end px-0 mb-1">
           <span class="text-danger">*</span>
           密碼：
         </label>
-        <input type="text" class="form-control mb-4" id="name" name="password" value="" required>
+        <input type="password" class="form-control mb-4" id="password" name="password" value="" required>
 
         <button type="submit" class="btn btn-warning btn-lg mt-5 d-block col-5 mx-auto">登入</button>
       </form>

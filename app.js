@@ -7,6 +7,7 @@ const session = require('express-session')
 const PORT = 3000
 const app = express()
 
+const usePassport = require('./config/passport')
 const routes = require('./routes')
 require('./config/mongoose')
 
@@ -23,7 +24,7 @@ app.use(session({
   saveUninitialized: true
 }))
 
-
+usePassport(app)
 app.use(routes)
 
 app.listen(PORT, () => {
