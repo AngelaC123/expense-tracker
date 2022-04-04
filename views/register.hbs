@@ -32,10 +32,13 @@
         <label for="confirmPassword" class="form-label text-end px-0 mb-1"><span class="text-danger">*</span>
           確認密碼：
         </label>
-        <input type="password" class="form-control mb-4" id="confirmPassword" name="confirmPassword"
+        <input type="password" class="form-control mb-3" id="confirmPassword" name="confirmPassword"
           value="{{confirmPassword}}" required>
 
-        <button type="submit" class="btn btn-warning btn-lg mt-5 d-block col-5 mx-auto">註冊</button>
+        <span>已經有帳號了？</span>
+        <a href="/user/login">登入</a>
+
+        <button type="submit" class="btn btn-warning btn-lg mt-4 d-block col-5 mx-auto">註冊</button>
       </form>
 
     </div>
