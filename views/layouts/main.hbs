@@ -16,12 +16,16 @@
 <body>
   <header>
     <nav class="navbar navbar-dark bg-secondary">
-
       <div class="container-fluid col-11">
-        <a href="/" class="navbar-brand h1 mb-0">家庭記帳本</a>
+        <a href="/" class="navbar-brand h1 my-1">
+          {{#if isAuthenticated}}
+          {{user.name}}
+          {{else}}我{{/if}}的記帳本
+        </a>
+        {{#if isAuthenticated}}
         <a href="/user/logout" class="btn btn-warning">Logout</a>
+        {{/if}}
       </div>
-
     </nav>
   </header>
 
