@@ -27,10 +27,11 @@ const SEED_CATEGORIES = [
 
 db.once('open', () => {
   return Promise.all(Array.from(SEED_CATEGORIES, (data, i) => {
-    Category.create({ name: data.name, iconClassList: data.icon })
+    return Category.create({ name: data.name, iconClassList: data.icon })
+
   }))
     .then(() => {
       console.log('categorySeeder done!')
-      // process.exit()
+      process.exit()
     })
 })
