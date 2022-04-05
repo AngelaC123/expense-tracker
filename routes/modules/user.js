@@ -11,9 +11,8 @@ router.get('/login', (req, res) => {
 })
 
 router.post('/login', passport.authenticate('local', {
-  successRedirect: '/',
-  failureRedireect: '/user/login'
-
+  failureRedirect: '/user/login',
+  successRedirect: '/'
 }))
 
 
@@ -23,23 +22,25 @@ router.get('/register', (req, res) => {
 })
 
 router.post('/register', (req, res) => {
+  const errors = []
 
   const { email, name, password, confirmPassword } = req.body
   if (!email || !name || !password || !confirmPassword) {
-    console.log('Email, name, password and confimr password are all required!')
-    return res.render('register', { email, name, password, confirmPassword })
+    errors.push({ msg: '名稱、Email、密碼及驗證密碼，都是必填欄位！' })
   }
 
   if (password !== confirmPassword) {
-    console.log('password and confimPassword do not match')
-    return res.render('register', { email, name, password, confirmPassword })
+    errors.push({ msg: '密碼與驗證密碼不相符，請重新輸入！' })
+  }
+  if (errors.length) {
+    return res.render('register', { errors, email, name, password, confirmPassword })
   }
 
   return User.findOne({ email })
     .then(user => {
       if (user) {
-        console.log('The email has already registered!')
-        return res.render('register', { email, name, password, confirmPassword })
+        errors.push({ msg: '這個Email已被註冊！' })
+        return res.render('register', { errors, email, name, password, confirmPassword })
       }
 
       return bcrypt
@@ -49,7 +50,10 @@ router.post('/register', (req, res) => {
           User.create({ email, name, password: hash })
           console.log('user account created!')
         })
-        .then(() => res.redirect('/user/login'))
+        .then(() => {
+          req.flash('success_msg', '註冊成功！請登入帳號開始使用！')
+          res.redirect('/user/login')
+        })
     })
 
     .catch(err => console.log(err))
@@ -59,6 +63,7 @@ router.post('/register', (req, res) => {
 // Logout
 router.get('/logout', (req, res) => {
   req.logout()
+  req.flash('success_msg', '您已成功登出！')
   res.redirect('/user/login')
 })
 
