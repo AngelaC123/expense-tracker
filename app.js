@@ -9,7 +9,7 @@ if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
 
-const PORT = 3000
+const PORT = process.env.PORT
 const app = express()
 
 const usePassport = require('./config/passport')
